@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verben-Training – Präsens, Präteritum, Perfekt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-900:#14532d;
+  --green-700:#1f7a3f;
+  --green-500:#34a853;
+  --green-100:#e3f4dc;
+  --green-50:#f3faef;
+  --yellow-500:#ffd23f;
+  --yellow-100:#fff4c2;
+  --ink:#1c2a21;
+  --muted:#5b6b60;
+  --red-600:#c93a3a;
+  --red-100:#fde4e1;
+  --white:#ffffff;
+  --radius-l:22px;
+  --radius-m:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--green-50);color:var(--ink);
+  font-family:"Nunito","Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  font-size:17px;line-height:1.5;
+}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--green-900);outline-offset:2px}
+
+/* ---------- En-tête ---------- */
+.top{
+  background:var(--green-700);color:var(--white);
+  padding:28px 20px 64px;
+}
+.top-inner,.wrap{max-width:880px;margin:0 auto}
+.top h1{
+  margin:0;font-weight:900;line-height:1.05;
+  font-size:clamp(2.1rem,7vw,3.4rem);letter-spacing:-.01em;
+}
+.top p{margin:10px 0 0;max-width:34em;font-weight:600;opacity:.95}
+.tenses{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding:0;list-style:none}
+.tenses li{
+  background:var(--yellow-500);color:var(--green-900);
+  font-weight:800;padding:4px 14px;border-radius:999px;font-size:.95rem;
+}
+
+/* ---------- Navigation ---------- */
+.wrap{padding:0 16px 48px}
+.nav{
+  display:flex;gap:8px;overflow-x:auto;
+  margin-top:-34px;padding:8px;
+  background:var(--white);border-radius:var(--radius-l);
+  box-shadow:0 6px 0 var(--green-100);
+}
+.nav button{
+  flex:1 0 auto;border:0;background:transparent;
+  padding:10px 14px;border-radius:var(--radius-m);
+  font-weight:800;color:var(--green-900);white-space:nowrap;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+}
+.nav button small{font-weight:700;font-size:.72rem;color:var(--muted);min-height:1.1em}
+.nav button:hover{background:var(--green-50)}
+.nav button[aria-selected="true"]{background:var(--yellow-500)}
+.nav button[aria-selected="true"] small{color:var(--green-900)}
+
+/* ---------- Cartes ---------- */
+.panel{margin-top:22px}
+.card{
+  background:var(--white);border-radius:var(--radius-l);
+  padding:22px;border:2px solid var(--green-100);
+}
+.card + .card{margin-top:16px}
+h2{margin:0 0 4px;font-weight:900;font-size:1.5rem;color:var(--green-900)}
+.lead{margin:0 0 16px;color:var(--muted);font-weight:600;max-width:60ch}
+
+.btn{
+  border:0;border-radius:999px;padding:11px 22px;font-weight:800;
+  background:var(--green-700);color:var(--white);
+  box-shadow:0 4px 0 var(--green-900);
+}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--green-900)}
+.btn.alt{background:var(--yellow-500);color:var(--green-900);box-shadow:0 4px 0 #d9a900}
+.btn.alt:active{box-shadow:0 2px 0 #d9a900}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{
+  border:2px solid var(--green-100);background:var(--white);
+  border-radius:999px;padding:6px 14px;font-weight:700;
+}
+.chip[aria-pressed="true"]{background:var(--green-700);border-color:var(--green-700);color:var(--white)}
+
+/* ---------- Tableau ---------- */
+.table-scroll{overflow-x:auto;border-radius:var(--radius-m);border:2px solid var(--green-100)}
+table{border-collapse:collapse;width:100%;min-width:680px;background:var(--white)}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--green-100)}
+th{background:var(--green-700);color:var(--white);font-weight:800}
+tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even) td{background:var(--green-50)}
+td b{color:var(--green-700);font-weight:900}
+td u{text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:var(--yellow-500)}
+.reveal{
+  border:2px dashed var(--green-500);background:var(--yellow-100);
+  border-radius:10px;padding:2px 14px;font-weight:800;color:var(--green-900);width:100%;
+}
+.legend{margin:14px 0 0;padding:0;list-style:none;color:var(--muted);font-size:.95rem;font-weight:600}
+.legend li{margin-top:4px}
+
+/* ---------- Paires ---------- */
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.pairs .col{display:grid;gap:10px;align-content:start}
+.tile{
+  border:2px solid var(--green-100);background:var(--white);
+  border-radius:var(--radius-m);padding:12px 10px;font-weight:800;text-align:center;
+  min-height:52px;
+}
+.tile.de{background:var(--yellow-100);border-color:var(--yellow-500)}
+.tile.sel{border-color:var(--green-900);box-shadow:0 0 0 3px var(--green-500)}
+.tile.ok{background:var(--green-100);border-color:var(--green-500);color:var(--green-900);opacity:.75;cursor:default}
+.tile.bad{background:var(--red-100);border-color:var(--red-600);animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* ---------- Quiz ---------- */
+.bar{height:10px;background:var(--green-100);border-radius:999px;overflow:hidden;margin-bottom:6px}
+.bar span{display:block;height:100%;background:var(--yellow-500);border-radius:999px;transition:width .25s}
+.count{font-weight:700;color:var(--muted);font-size:.9rem;margin:0 0 14px}
+.tag{
+  display:inline-block;background:var(--yellow-500);color:var(--green-900);
+  font-weight:900;border-radius:999px;padding:3px 14px;margin-bottom:10px;
+}
+.q{font-size:clamp(1.35rem,4.6vw,1.9rem);font-weight:900;line-height:1.25;margin:0;color:var(--green-900)}
+.q .gap{
+  display:inline-block;min-width:3.2em;border-bottom:4px solid var(--yellow-500);
+  text-align:center;color:var(--green-700);
+}
+.fr{margin:6px 0 16px;color:var(--muted);font-weight:600}
+.opts{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.opt{
+  border:2px solid var(--green-100);background:var(--green-50);
+  border-radius:var(--radius-m);padding:14px;font-weight:800;font-size:1.1rem;
+}
+.opt:hover:not(:disabled){border-color:var(--green-500)}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--green-100);border-color:var(--green-500);color:var(--green-900)}
+.opt.wrong{background:var(--red-100);border-color:var(--red-600);color:var(--red-600)}
+.type-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.type-row .er{font-weight:900;font-size:1.3rem}
+.type-row input{
+  flex:1 1 220px;min-width:0;border:2px solid var(--green-500);border-radius:var(--radius-m);
+  padding:12px 14px;font-weight:700;font-size:1.15rem;background:var(--white);
+}
+.type-row input:disabled{background:var(--green-50);border-color:var(--green-100)}
+.keys{display:flex;gap:8px;margin:10px 0 14px}
+.keys button{
+  border:2px solid var(--green-100);background:var(--white);border-radius:10px;
+  width:44px;height:40px;font-weight:800;
+}
+.tip{margin:0 0 12px;font-size:.93rem;color:var(--muted);font-weight:600}
+.fb{margin-top:16px;border-radius:var(--radius-m);padding:12px 16px;font-weight:700}
+.fb.good{background:var(--green-100);color:var(--green-900)}
+.fb.no{background:var(--red-100);color:var(--red-600)}
+.fb strong{font-weight:900}
+.fb .why{display:block;font-weight:600;color:var(--ink);margin-top:2px}
+.next{margin-top:16px}
+
+/* ---------- Résultat ---------- */
+.result{text-align:center}
+.stars{font-size:2.6rem;letter-spacing:6px;color:var(--yellow-500);line-height:1}
+.stars .off{color:var(--green-100)}
+.score{font-size:2.4rem;font-weight:900;color:var(--green-900);margin:6px 0 0}
+.review{text-align:left;margin:18px 0 0;padding:14px 18px;background:var(--yellow-100);border-radius:var(--radius-m)}
+.review h3{margin:0 0 6px;font-size:1rem;font-weight:900}
+.review ul{margin:0;padding-left:1.1em}
+.review li{margin:3px 0}
+
+footer{margin-top:28px;text-align:center;color:var(--muted);font-size:.9rem;font-weight:600}
+
+@media (max-width:520px){
+  .card{padding:18px 16px}
+  .tile{padding:10px 6px;font-size:.98rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <h1>Verben-Training</h1>
+    <p>12 verbes à connaître par cœur, en français et en allemand, à trois temps.</p>
+    <ul class="tenses" aria-label="Temps travaillés">
+      <li>Präsens</li><li>Präteritum</li><li>Perfekt</li>
+    </ul>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="nav" role="tablist" aria-label="Activités" id="nav"></nav>
+  <main id="main" class="panel"></main>
+  <footer>Deutsch · V. Kalinijabo</footer>
+</div>
+
+<script>
+/* ================= Données ================= */
+const VERBS = [
+  {fr:"nager", inf:"schwimmen", infH:"schwimmen", pras:"er schwimmt", prat:"er schwamm", perf:"er ist geschwommen", perfH:"er <b>ist</b> geschwomm<b>en</b>", aux:"ist", part:"geschwommen"},
+  {fr:"apporter", inf:"mitbringen", infH:"<u>mit</u>bringen", pras:"er bringt ... mit", prat:"er brachte ... mit", perf:"er hat mitgebracht", perfH:"er hat mitgebr<b>acht</b>", aux:"hat", part:"mitgebracht", sep:true},
+  {fr:"faire griller", inf:"grillen", infH:"grillen", pras:"er grillt", prat:"er grillte", perf:"er hat gegrillt", perfH:"er hat gegrillt", aux:"hat", part:"gegrillt"},
+  {fr:"saluer", inf:"grüßen", infH:"grüßen", pras:"er grüßt", prat:"er grüßte", perf:"er hat gegrüßt", perfH:"er hat gegrüßt", aux:"hat", part:"gegrüßt"},
+  {fr:"aller chercher", inf:"abholen", infH:"<u>ab</u>holen", pras:"er holt ... ab", prat:"er holte ... ab", perf:"er hat abgeholt", perfH:"er hat abgeholt", aux:"hat", part:"abgeholt", sep:true},
+  {fr:"connaître", inf:"kennenlernen", infH:"<u>kennen</u>lernen", pras:"er lernt ... kennen", prat:"er lernte ... kennen", perf:"er hat kennengelernt", perfH:"er hat kennengelernt", aux:"hat", part:"kennengelernt", sep:true},
+  {fr:"envoyer", inf:"schicken", infH:"schicken", pras:"er schickt", prat:"er schickte", perf:"er hat geschickt", perfH:"er hat geschickt", aux:"hat", part:"geschickt"},
+  {fr:"partager", inf:"teilen", infH:"teilen", pras:"er teilt", prat:"er teilte", perf:"er hat geteilt", perfH:"er hat geteilt", aux:"hat", part:"geteilt"},
+  {fr:"améliorer", inf:"verbessern", infH:"verbessern", pras:"er verbessert", prat:"er verbesserte", perf:"er hat verbessert", perfH:"er hat verbessert", aux:"hat", part:"verbessert"},
+  {fr:"embrasser", inf:"küssen", infH:"küssen", pras:"er küsst", prat:"er küsste", perf:"er hat geküsst", perfH:"er hat geküsst", aux:"hat", part:"geküsst"},
+  {fr:"parler", inf:"sprechen", infH:"sprechen", pras:"er spricht", prat:"er sprach", perf:"er hat gesprochen", perfH:"er hat gesproch<b>en</b>", aux:"hat", part:"gesprochen"},
+  {fr:"être (sérieux)", inf:"sein", infH:"sein", pras:"er ist", prat:"er war", perf:"er ist gewesen", perfH:"er <b>ist</b> gewes<b>en</b>", aux:"ist", part:"gewesen"}
+];
+
+const SENTENCES = [
+  {q:"Gestern ___ Tim im See.", fr:"Hier, Tim a nagé dans le lac.", a:"schwamm", o:["schwimmte","schwimmt"], why:"schwimmen est irrégulier : er schwamm."},
+  {q:"Lena hat einen Kuchen ___.", fr:"Lena a apporté un gâteau.", a:"mitgebracht", o:["mitgebringt","gemitbracht"], why:"Verbe séparable : ge se glisse entre mit et bracht."},
+  {q:"Papa hat Würstchen ___.", fr:"Papa a fait griller des saucisses.", a:"gegrillt", o:["gegrillen","grillte"], why:"Verbe régulier : ge + grill + t."},
+  {q:"Der Lehrer ___ die Klasse jeden Morgen.", fr:"Le prof salue la classe chaque matin.", a:"grüßt", o:["gegrüßt","grüßen"], why:"jeden Morgen → Präsens : er grüßt."},
+  {q:"Mama hat mich von der Schule ___.", fr:"Maman est venue me chercher à l'école.", a:"abgeholt", o:["geabholt","abholt"], why:"Verbe séparable : ab + ge + holt."},
+  {q:"Letzten Sommer ___ Paul viele Freunde kennen.", fr:"L'été dernier, Paul a fait la connaissance de beaucoup d'amis.", a:"lernte", o:["lernt","gelernt"], why:"Letzten Sommer → Präteritum : er lernte … kennen."},
+  {q:"Sie hat mir ein Foto ___.", fr:"Elle m'a envoyé une photo.", a:"geschickt", o:["geschicken","schickte"], why:"Avec hat, il faut le participe : geschickt."},
+  {q:"Er hat die Pizza mit seinem Bruder ___.", fr:"Il a partagé la pizza avec son frère.", a:"geteilt", o:["geteilen","teilt"], why:"Verbe régulier : ge + teil + t."},
+  {q:"Sie hat ihre Note ___.", fr:"Elle a amélioré sa note.", a:"verbessert", o:["geverbessert","verbessern"], why:"Les verbes en ver- ne prennent pas ge- au participe."},
+  {q:"Gestern ___ der Prinz die Prinzessin.", fr:"Hier, le prince a embrassé la princesse.", a:"küsste", o:["küsst","geküsst"], why:"Gestern, sans auxiliaire → Präteritum : küsste."},
+  {q:"Früher ___ er nur Französisch.", fr:"Avant, il ne parlait que français.", a:"sprach", o:["sprechte","spricht"], why:"sprechen est irrégulier : er sprach."},
+  {q:"Er ___ heute sehr gut Deutsch.", fr:"Aujourd'hui, il parle très bien allemand.", a:"spricht", o:["sprecht","sprichst"], why:"Au présent, le e devient i : er spricht."},
+  {q:"Er ___ gestern sehr müde.", fr:"Il était très fatigué hier.", a:"war", o:["ist","gewesen"], why:"gestern → Präteritum de sein : er war."},
+  {q:"Er ___ schon 500 Meter geschwommen.", fr:"Il a déjà nagé 500 mètres.", a:"ist", o:["hat","bist"], why:"schwimmen exprime un déplacement : Perfekt avec sein."}
+];
+
+const TENSES = {pras:"Präsens", prat:"Präteritum", perf:"Perfekt"};
+
+/* ================= Outils ================= */
+const $ = (s, r=document) => r.querySelector(s);
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.toLowerCase().replace(/…|\.{2,}/g," ").replace(/[.,!?]/g,"")
+  .replace(/ß/g,"ss").replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue")
+  .replace(/\s+/g," ").trim().replace(/^er /,"");
+
+const STORE = "verben-training-v1";
+let best = {};
+try { best = JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e) { best = {}; }
+function saveBest(key, score, total){
+  if (!best[key] || score > best[key][0]) {
+    best[key] = [score, total];
+    try { localStorage.setItem(STORE, JSON.stringify(best)); } catch(e) {}
+  }
+  drawNav();
+}
+
+/* ================= Navigation ================= */
+const TABS = [
+  {id:"tabelle", label:"Tabelle", view:viewTable},
+  {id:"paare",   label:"Paare", view:viewPairs},
+  {id:"formen",  label:"Formen", view:viewForms},
+  {id:"hilfsverb", label:"hat oder ist?", view:viewAux},
+  {id:"saetze",  label:"Sätze", view:viewSentences}
+];
+let current = "tabelle";
+const main = $("#main");
+
+function drawNav(){
+  $("#nav").innerHTML = TABS.map(t => {
+    const b = best[t.id];
+    const sub = t.id === "tabelle" ? "apprendre" : (b ? "record " + b[0] + "/" + b[1] : "à faire");
+    return `<button role="tab" data-tab="${t.id}" aria-selected="${t.id===current}">${t.label}<small>${sub}</small></button>`;
+  }).join("");
+}
+$("#nav").addEventListener("click", e => {
+  const b = e.target.closest("button[data-tab]");
+  if (!b) return;
+  current = b.dataset.tab;
+  drawNav();
+  TABS.find(t => t.id === current).view();
+});
+
+/* ================= 1. Tableau ================= */
+const hidden = new Set();
+const shown = new Set();
+function viewTable(){
+  const cols = [["inf","Deutsch"],["pras","Präsens"],["prat","Präteritum"],["perf","Perfekt"]];
+  const cell = (v, i, k) => {
+    if (hidden.has(k) && !shown.has(i + k)) return `<td><button class="reveal" data-r="${i}${k}" aria-label="Montrer la réponse">?</button></td>`;
+    const html = k === "inf" ? v.infH : k === "perf" ? v.perfH : esc(v[k]);
+    return `<td>${html}</td>`;
+  };
+  main.innerHTML = `
+  <section class="card">
+    <h2>Les 12 verbes</h2>
+    <p class="lead">Lis le tableau, puis cache une ou plusieurs colonnes pour te tester. Dis la forme à voix haute avant de toucher le « ? ».</p>
+    <div class="chips" id="hide">
+      ${cols.map(([k,l]) => `<button class="chip" data-k="${k}" aria-pressed="${hidden.has(k)}">Cacher ${l}</button>`).join("")}
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Französisch</th>${cols.map(c => `<th>${c[1]}</th>`).join("")}</tr></thead>
+        <tbody>
+          ${VERBS.map((v,i) => `<tr><td>${esc(v.fr)}</td>${cols.map(c => cell(v,i,c[0])).join("")}</tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+    <ul class="legend">
+      <li><u style="text-decoration-color:var(--yellow-500);text-decoration-thickness:2px">Souligné</u> : la partie du verbe qui se sépare et part à la fin (er bringt … <u>mit</u>).</li>
+      <li><b style="color:var(--green-700)">ist</b> : Perfekt avec sein au lieu de haben.</li>
+      <li><b style="color:var(--green-700)">en / acht</b> : participe irrégulier, à apprendre par cœur.</li>
+    </ul>
+  </section>`;
+  $("#hide").onclick = e => {
+    const b = e.target.closest("[data-k]"); if (!b) return;
+    const k = b.dataset.k;
+    hidden.has(k) ? hidden.delete(k) : hidden.add(k);
+    [...shown].forEach(s => { if (s.endsWith(k)) shown.delete(s); });
+    viewTable();
+  };
+  $("tbody", main).onclick = e => {
+    const b = e.target.closest("[data-r]"); if (!b) return;
+    shown.add(b.dataset.r); viewTable();
+  };
+}
+
+/* ================= 2. Paires ================= */
+function viewPairs(){
+  const order = shuffle(VERBS.map((_,i) => i));
+  const rounds = [order.slice(0,6), order.slice(6)];
+  let round = 0, sel = null, done = 0;
+  const missed = new Set();
+
+  function draw(){
+    const ids = rounds[round];
+    const col = (list, side) => list.map(i =>
+      `<button class="tile ${side}" data-side="${side}" data-i="${i}">${esc(side==="fr" ? VERBS[i].fr : VERBS[i].inf)}</button>`).join("");
+    main.innerHTML = `
+    <section class="card">
+      <h2>Paare finden</h2>
+      <p class="lead">Touche un verbe français, puis sa traduction allemande. Série ${round+1} sur 2.</p>
+      <div class="pairs" id="pairs">
+        <div class="col">${col(shuffle(ids),"fr")}</div>
+        <div class="col">${col(shuffle(ids),"de")}</div>
+      </div>
+      <div id="after"></div>
+    </section>`;
+    sel = null; done = 0;
+    $("#pairs").onclick = click;
+  }
+  function click(e){
+    const t = e.target.closest(".tile");
+    if (!t || t.classList.contains("ok")) return;
+    if (!sel || sel.dataset.side === t.dataset.side) {
+      if (sel) sel.classList.remove("sel");
+      sel = t; t.classList.add("sel"); return;
+    }
+    const a = sel, b = t;
+    a.classList.remove("sel"); sel = null;
+    if (a.dataset.i === b.dataset.i) {
+      [a,b].forEach(x => { x.classList.add("ok"); x.disabled = true; });
+      if (++done === 6) finish();
+    } else {
+      missed.add(a.dataset.side === "fr" ? a.dataset.i : b.dataset.i);
+      [a,b].forEach(x => { x.classList.add("bad"); setTimeout(() => x.classList.remove("bad"), 450); });
+    }
+  }
+  function finish(){
+    if (round === 0) {
+      $("#after").innerHTML = `<p class="fb good">Gut gemacht! Encore 6 verbes.</p><button class="btn next" id="go">Weiter</button>`;
+      $("#go").onclick = () => { round = 1; draw(); };
+      $("#go").focus();
+    } else {
+      const wrong = [...missed].map(i => `${esc(VERBS[i].fr)} = <strong>${esc(VERBS[i].inf)}</strong>`);
+      showResult("paare", 12 - missed.size, 12, wrong, viewPairs);
+    }
+  }
+  draw();
+}
+
+/* ================= Moteur de quiz ================= */
+function runQuiz(root, key, items, restart){
+  let i = 0, score = 0;
+  const wrong = [];
+
+  function draw(){
+    if (i >= items.length) return showResult(key, score, items.length, wrong, restart, root);
+    const it = items[i];
+    const body = it.type === "mc"
+      ? `<div class="opts">${it.options.map(o => `<button class="opt" data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>`
+      : `${it.tip ? `<p class="tip">${it.tip}</p>` : ""}
+         <div class="type-row"><span class="er">er</span>
+           <input id="ans" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Ta réponse">
+           <button class="btn" id="check">Prüfen</button></div>
+         <div class="keys" aria-label="Lettres spéciales">${["ä","ö","ü","ß"].map(c => `<button type="button" data-c="${c}">${c}</button>`).join("")}</div>`;
+    root.innerHTML = `
+      <div class="bar"><span style="width:${i/items.length*100}%"></span></div>
+      <p class="count">Frage ${i+1} / ${items.length}</p>
+      ${it.tag ? `<span class="tag">${it.tag}</span>` : ""}
+      <p class="q">${it.q}</p>
+      <p class="fr">${esc(it.fr)}</p>
+      ${body}
+      <div id="fb" aria-live="polite"></div>`;
+
+    if (it.type === "mc") {
+      $(".opts", root).onclick = e => {
+        const b = e.target.closest(".opt"); if (!b) return;
+        const ok = b.dataset.o === it.answer;
+        root.querySelectorAll(".opt").forEach(x => {
+          x.disabled = true;
+          if (x.dataset.o === it.answer) x.classList.add("right");
+        });
+        if (!ok) b.classList.add("wrong");
+        answered(ok, it);
+      };
+    } else {
+      const inp = $("#ans", root);
+      inp.focus();
+      const check = () => {
+        if (inp.disabled) return;
+        if (!inp.value.trim()) { inp.focus(); return; }
+        inp.disabled = true; $("#check", root).disabled = true;
+        answered(norm(inp.value) === norm(it.answer), it);
+      };
+      $("#check", root).onclick = check;
+      inp.onkeydown = e => { if (e.key === "Enter") check(); };
+      $(".keys", root).onclick = e => {
+        const b = e.target.closest("[data-c]"); if (!b || inp.disabled) return;
+        const s = inp.selectionStart ?? inp.value.length, en = inp.selectionEnd ?? s;
+        inp.value = inp.value.slice(0,s) + b.dataset.c + inp.value.slice(en);
+        inp.focus(); inp.setSelectionRange(s+1, s+1);
+      };
+    }
+  }
+  function answered(ok, it){
+    if (ok) score++; else wrong.push(it.review);
+    $("#fb", root).innerHTML = `
+      <p class="fb ${ok ? "good" : "no"}">${ok ? "Richtig!" : `Falsch. Réponse : <strong>${esc(it.full)}</strong>`}
+        ${it.why ? `<span class="why">${it.why}</span>` : ""}</p>
+      <button class="btn next" id="next">${i+1 < items.length ? "Weiter" : "Voir mon résultat"}</button>`;
+    const n = $("#next", root);
+    n.onclick = () => { i++; draw(); };
+    n.focus();
+  }
+  draw();
+}
+
+function showResult(key, score, total, wrong, restart, root){
+  saveBest(key, score, total);
+  const pct = score / total;
+  const stars = pct >= .9 ? 3 : pct >= .7 ? 2 : pct >= .5 ? 1 : 0;
+  const msg = stars === 3 ? "Ausgezeichnet! Tu maîtrises ces verbes."
+            : stars === 2 ? "Gut! Encore un petit effort sur les erreurs ci-dessous."
+            : stars === 1 ? "Nicht schlecht. Revois le tableau, puis recommence."
+            : "Retourne au tableau, cache une colonne et entraîne-toi, puis réessaie.";
+  const html = `
+    <div class="result">
+      <div class="stars" aria-label="${stars} étoiles sur 3">${"★".repeat(stars)}<span class="off">${"★".repeat(3-stars)}</span></div>
+      <p class="score">${score} / ${total}</p>
+      <p class="lead" style="margin:6px auto 16px">${msg}</p>
+      ${wrong.length ? `<div class="review"><h3>À revoir</h3><ul>${wrong.map(w => `<li>${w}</li>`).join("")}</ul></div>` : ""}
+      <p style="margin:20px 0 0"><button class="btn alt" id="again">Nochmal</button></p>
+    </div>`;
+  if (root) root.innerHTML = html;
+  else main.innerHTML = `<section class="card">${html}</section>`;
+  $("#again").onclick = restart;
+  $("#again").focus();
+}
+
+/* ================= 3. Formes à écrire ================= */
+let formTense = "mix";
+function viewForms(){
+  const chips = [["mix","Alle"],["pras","Präsens"],["prat","Präteritum"],["perf","Perfekt"]];
+  main.innerHTML = `
+  <section class="card">
+    <h2>Formen schreiben</h2>
+    <p class="lead">Écris la forme demandée à la 3ᵉ personne (er). Choisis un temps ou mélange les trois.</p>
+    <div class="chips" id="tense">${chips.map(([k,l]) => `<button class="chip" data-k="${k}" aria-pressed="${k===formTense}">${l}</button>`).join("")}</div>
+    <div id="quiz"></div>
+  </section>`;
+  $("#tense").onclick = e => {
+    const b = e.target.closest("[data-k]"); if (!b) return;
+    formTense = b.dataset.k; viewForms();
+  };
+  const keys = Object.keys(TENSES);
+  const items = shuffle(VERBS).map(v => {
+    const t = formTense === "mix" ? keys[Math.floor(Math.random()*3)] : formTense;
+    return {
+      type:"write", tag:TENSES[t],
+      q:esc(v.inf), fr:v.fr,
+      answer:v[t], full:v[t],
+      tip: v.sep && t !== "perf" ? "Verbe séparable : écris les deux parties, avec … entre les deux (ou un simple espace)." : "",
+      review:`${esc(v.inf)}, ${TENSES[t]} : <strong>${esc(v[t])}</strong>`
+    };
+  });
+  runQuiz($("#quiz"), "formen", items, viewForms);
+}
+
+/* ================= 4. hat oder ist ================= */
+function viewAux(){
+  main.innerHTML = `
+  <section class="card">
+    <h2>hat oder ist?</h2>
+    <p class="lead">Au Perfekt, la plupart des verbes prennent haben. Deux verbes de la liste prennent sein. Lesquels ?</p>
+    <div id="quiz"></div>
+  </section>`;
+  const items = shuffle(VERBS).map(v => ({
+    type:"mc", options:["hat","ist"], answer:v.aux,
+    q:`er <span class="gap">?</span> ${esc(v.part)}`, fr:v.fr,
+    full:v.perf,
+    why: v.inf === "schwimmen" ? "schwimmen = déplacement d'un point à un autre → sein."
+       : v.inf === "sein" ? "sein forme son Perfekt avec lui-même : er ist gewesen."
+       : "",
+    review:`${esc(v.inf)} : <strong>${esc(v.perf)}</strong>`
+  }));
+  runQuiz($("#quiz"), "hilfsverb", items, viewAux);
+}
+
+/* ================= 5. Phrases ================= */
+function viewSentences(){
+  main.innerHTML = `
+  <section class="card">
+    <h2>Sätze ergänzen</h2>
+    <p class="lead">Choisis la bonne forme pour compléter la phrase. Regarde bien les indices de temps (gestern, jeden Morgen, hat …).</p>
+    <div id="quiz"></div>
+  </section>`;
+  const items = shuffle(SENTENCES).map(s => {
+    const filled = s.q.replace("___", s.a);
+    return {
+      type:"mc", options:shuffle([s.a, ...s.o]), answer:s.a,
+      q:esc(s.q).replace("___", '<span class="gap">?</span>'),
+      fr:s.fr, full:filled, why:s.why,
+      review:esc(s.q).replace("___", `<strong>${esc(s.a)}</strong>`)
+    };
+  });
+  runQuiz($("#quiz"), "saetze", items, viewSentences);
+}
+
+/* ================= Départ ================= */
+drawNav();
+viewTable();
+</script>
+</body>
+</html>
